@@ -1,0 +1,26 @@
+.md-header__version {
+  flex-shrink: 0;
+  margin-left: 0.4rem;
+}
+
+.md-header__version-select {
+  max-width: 8rem;
+  padding: 0.35rem 1.4rem 0.35rem 0.55rem;
+  color: inherit;
+  font: inherit;
+  background: transparent;
+  border: 1px solid currentcolor;
+  border-radius: 0.2rem;
+  cursor: pointer;
+}
+
+.md-header__version-select option {
+  color: var(--md-default-fg-color);
+  background: var(--md-default-bg-color);
+}
+
+@media screen and (max-width: 44.984375em) {
+  .md-header__version-select {
+    max-width: 5rem;
+  }
+}

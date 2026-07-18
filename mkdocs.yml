@@ -52,6 +52,12 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.superfences
 
+extra_css:
+  - stylesheets/version-selector.css
+
+extra_javascript:
+  - javascripts/version-selector.js
+
 extra:
   version:
     provider: mike
