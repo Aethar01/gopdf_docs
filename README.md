@@ -20,9 +20,3 @@ cd ../gopdf_docs
 pip install -r requirements.txt
 mkdocs serve
 ```
-
-The generated `docs/reference.md` and `_site` output are intentionally ignored.
-
-## Automation
-
-The Pages workflow rebuilds when this repository changes, on manual dispatch, and hourly. For immediate rebuilds after a gopdf push or tag, configure a `DOCS_REPO_TOKEN` secret in the gopdf repository with permission to dispatch Actions in `Aethar01/gopdf_docs`.
