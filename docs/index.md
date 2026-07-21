@@ -1,4 +1,4 @@
-# Read the document. Nothing else.
+# gopdf
 
 **gopdf** is a minimal, keyboard-driven PDF viewer backed by MuPDF and configured with Lua.
 
