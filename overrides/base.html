@@ -1,16 +1,16 @@
-{% extends "base.html" %}
+{% extends "!base.html" %}
 
 {% block extrahead %}
   <script>
   (function() {
-    // Project path where the build already writes versions.json.
+    // Project path where versions.json is located
     var PROJECT_PATH = '/gopdf_docs';
     var origFetch = window.fetch.bind(window);
 
-    // Intercept attempts to fetch the root /versions.json and proxy them to the project copy.
+    // Intercept attempts to fetch /versions.json and proxy them to the project copy
     window.fetch = function(input, init) {
       try {
-        var url = (typeof input === 'string') ? input : (input instanceof Request ? input.url : input);
+        var url = (typeof input === 'string') ? url : (input instanceof Request ? input.url : input);
         var parsed = new URL(url, location.href);
 
         if (parsed.pathname === '/versions.json') {
@@ -18,7 +18,7 @@
           return origFetch(proxy, init);
         }
       } catch (e) {
-        // If anything goes wrong, fall back to the original fetch.
+        // If anything goes wrong, fall back to the original fetch
       }
       return origFetch(input, init);
     };
