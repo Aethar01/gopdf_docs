@@ -10,6 +10,7 @@ theme:
   language: en
   logo: assets/logo.svg
   favicon: assets/logo.svg
+  custom_dir: overrides
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
