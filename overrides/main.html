@@ -7,7 +7,22 @@
     var PROJECT_PATH = '/gopdf_docs';
     var origFetch = window.fetch.bind(window);
 
-    // Intercept attempts to fetch /versions.json and proxy them to the project copy
+    // Material's mike provider uses XMLHttpRequest for versions.json. GitHub Pages
+    // serves the project at /gopdf_docs, while the provider requests /versions.json.
+    var origOpen = XMLHttpRequest.prototype.open;
+    XMLHttpRequest.prototype.open = function(method, url) {
+      try {
+        var parsed = new URL(url, location.href);
+        if (parsed.pathname === '/versions.json') {
+          url = location.origin + PROJECT_PATH + '/versions.json';
+        }
+      } catch (e) {
+        // If anything goes wrong, fall back to the original URL.
+      }
+      return origOpen.apply(this, [method, url].concat(Array.prototype.slice.call(arguments, 2)));
+    };
+
+    // Keep the same redirect for integrations that use fetch instead.
     window.fetch = function(input, init) {
       try {
         var url = (typeof input === 'string') ? input : (input instanceof Request ? input.url : input);
