@@ -37,6 +37,28 @@
       }
       return origFetch(input, init);
     };
+
+    // The root build makes mike's version links relative to the domain root.
+    // Add the GitHub Pages project prefix before the browser follows them.
+    function prefixVersionLink(event) {
+      var link = event.target.closest && event.target.closest('a');
+      if (!link || !link.href) return;
+
+      try {
+        var parsed = new URL(link.href, location.href);
+        var isVersion = parsed.origin === location.origin &&
+          /^\/(?:git|v?\d[^/]*)(?:\/|$)/.test(parsed.pathname);
+        if (isVersion && parsed.pathname.indexOf(PROJECT_PATH + '/') !== 0) {
+          parsed.pathname = PROJECT_PATH + parsed.pathname;
+          link.href = parsed.href;
+        }
+      } catch (e) {
+        // Leave links unchanged if they cannot be parsed.
+      }
+    }
+
+    document.addEventListener('pointerover', prefixVersionLink, true);
+    document.addEventListener('click', prefixVersionLink, true);
   })();
   </script>
   {{ super() }}
